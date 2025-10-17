@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Buku Saku Digital — DV-Team NP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+      --bg-dark-navy: #0a0f1e;
+      --card-bg: rgba(17, 24, 39, 0.6);
+      --text-primary: #f0f2f5;
+      --text-secondary: #a8b2c5;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-blue: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.5);
+      --font-primary: 'Inter', sans-serif;
+      --font-secondary: 'Poppins', sans-serif;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes backgroundPan {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-primary);
+      color: var(--text-primary);
+      background-color: var(--bg-dark-navy);
+      background-image:
+        radial-gradient(at 0% 0%, hsla(253, 100%, 7%, 1) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, hsla(217, 100%, 15%, 1) 0px, transparent 50%);
+      background-attachment: fixed;
+      animation: backgroundPan 15s infinite;
+    }
+
+    .header {
+      padding: 40px 24px;
+      text-align: center;
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .tagline {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    
+    .tagline span {
+        display: block;
+        font-size: 14px;
+        color: var(--text-secondary);
+        text-transform: none;
+        letter-spacing: normal;
+        margin-top: 4px;
+    }
+
+    .header h1 {
+      font-family: var(--font-secondary);
+      font-size: clamp(2rem, 5vw + 1rem, 2.625rem);
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-primary);
+      text-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 1vw + 0.75rem, 1.125rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-top: 16px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+      padding: 0 16px; 
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      padding: 0 24px 40px 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out forwards;
+      min-height: 240px; 
+      
+      /* --- PERBAIKAN UTAMA DI SINI --- */
+      -webkit-user-select: none; /* Mencegah seleksi teks di Safari */
+      -moz-user-select: none;    /* Mencegah seleksi teks di Firefox */
+      -ms-user-select: none;     /* Mencegah seleksi teks di IE/Edge */
+      user-select: none;         /* Properti standar */
+      -webkit-tap-highlight-color: transparent; /* Menghilangkan highlight saat disentuh */
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
+    
+    .card:hover,
+    .card:active {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 16px 45px rgba(0,0,0,0.5);
+      border-color: var(--accent-blue);
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .card-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-family: var(--font-secondary);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .card p {
+      margin: 0 0 20px;
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex-grow: 1; 
+    }
+
+    .buttons a.open {
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      background: var(--accent-blue);
+      color: #fff;
+      border: 1px solid transparent;
+      width: 100%;
+    }
+    
+    .buttons a.open:hover,
+    .buttons a.open:active {
+      background: #fff;
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      transform: scale(1.02);
+    }
+    
+    .buttons a.open:active {
+      transform: scale(0.98);
+    }
+
+    .education h2 { color: #60a5fa; }
+    .openmind h2 { color: #fb923c; }
+    .success h2 { color: #4ade80; }
+    .professional h2 { color: #2dd4bf; }
+    .rules h2 { color: #fde047; }
+    .app h2 { color: #22d3ee; }
+
+    @media (max-width: 768px) {
+        .header {
+            padding: 30px 16px;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            line-height: 1.6;
+        }
+        .card-container {
+            padding: 0 16px 30px 16px;
+            gap: 20px;
+        }
+        .card {
+            padding: 24px;
+        }
+        .buttons a.open {
+            font-size: 15px;
+            padding: 12px 16px;
+        }
+    }
+</style>
+<link href="manifest.json" rel="manifest"/><meta content="#0a0f1e" name="theme-color"/></head>
+<body>
+
+<div class="header">
+  <div class="tagline">
+    Dipersembahkan Oleh:
+    <span>DV Team Naga Persada</span>
+  </div>
+  <h1>Buku Saku Digital</h1>
+  <p class="subtitle">Kumpulan materi, alat, dan panduan terkurasi untuk mengakselerasi pertumbuhan dan kesuksesan Anda di dalam tim.</p>
+</div>
+
+<div class="card-container">
+    <div class="card education">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="#60a5fa"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+      <h2>Panduan OPALP & DVTEAM</h2>
+    </div>
+    <p>Gunakan untuk menjelaskan profit statis & dinamis, keamanan dan legalitas, dll. Dengan bahasa yang sederhana dan persuasif.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/edukasiNP-1/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card openmind">
+    <div class="card-header">
+       <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fb923c"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" /></svg>
+      <h2>Audio Presentasi</h2>
+    </div>
+    <p>Dengarkan alat presentasi bisnis dalam format audio yang praktis saat bepergian.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/edukasiNP-2/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card openmind">
+     <div class="card-header">
+       <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fb923c"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.311l-3.75 0M12 12.75h.008v.008H12v-.008zM12 15h.008v.008H12v-.008zm0 2.25h.008v.008H12v-.008zM15 12.75h.008v.008H15v-.008zm0 2.25h.008v.008H15v-.008zm0 2.25h.008v.008H15v-.008zM9 12.75h.008v.008H9v-.008zm0 2.25h.008v.008H9v-.008zm0 2.25h.008v.008H9v-.008z" /></svg>
+       <h2>Audio - Daftar Inventaris Aset Sosial</h2>
+    </div>
+    <p>Materi audio untuk memaksimalkan potensi diri dalam meraih kesuksesan.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/edukasiNP-3/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card success">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="#4ade80"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+      <h2>5 Kunci Sukses</h2>
+    </div>
+    <p>Lima prinsip praktis agar anggota tetap konsisten dan terus bertumbuh.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/edukasiNP-5/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card professional">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2dd4bf"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6v-.75c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5" /></svg>
+      <h2>Audio Langkah Awal & Metode Kerja Profesional</h2>
+    </div>
+    <p>Materi untuk membentuk cara kerja yang lebih efektif, efisien, dan profesional.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/edukasiDNA-NP/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card professional">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2dd4bf"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.228a4.5 4.5 0 00-1.875-2.252A18.37 18.37 0 013 11.493a18.37 18.37 0 013.741-3.951 4.5 4.5 0 001.875-2.252m-1.875-2.252a18.37 18.37 0 00-3.741-3.951 3 3 0 004.682 2.72a9.094 9.094 0 003.741.479m-9.375 9.375a18.37 18.37 0 00-3.741 3.951 3 3 0 004.682-2.72a9.094 9.094 0 003.741-.479M12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" /></svg>
+      <h2>Membangun Tim Inti</h2>
+    </div>
+    <p>Panduan strategis untuk membentuk dan mengembangkan tim inti yang solid.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/Genderang-perang/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card openmind">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="#fb923c"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9.75 9.75 0 001.146-5.636m7.708 5.636a9.75 9.75 0 01-1.146-5.636m7.708 5.636l3.182-5.636a2.25 2.25 0 00-2.121-3.238H5.501a2.25 2.25 0 00-2.121 3.238l3.182 5.636m7.708 5.636a6.75 6.75 0 01-7.708 0" /></svg>
+      <h2>Memperbaiki Citra Diri bag. 1</h2>
+    </div>
+    <p>Langkah awal untuk memahami dan membangun citra diri yang lebih positif.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/Pejuangtangguh/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card openmind">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="#fb923c"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4-2.245 4.5 4.5 0 008.4-2.222 3 3 0 00-5.78-1.128 2.25 2.25 0 01-2.4-2.245 4.5 4.5 0 008.4-2.222 3 3 0 00-5.78-1.128 2.25 2.25 0 01-2.4-2.245A4.5 4.5 0 0012 3.75a4.5 4.5 0 00-2.47 8.25" /></svg>
+      <h2>Memperbaiki Citra Diri bag. 2</h2>
+    </div>
+    <p>Melanjutkan perjalanan membangun kepercayaan dan citra diri yang kuat.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/Pejuangtangguh2/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card openmind">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="#fb923c"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+      <h2>Memperbaiki Citra Diri bag. 3</h2>
+    </div>
+    <p>Tahap akhir dalam transformasi citra diri untuk kesuksesan jangka panjang.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/HabisGelapTT/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card openmind">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fb923c"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-1.083A2.25 2.25 0 0114.25 15v2.25a2.25 2.25 0 01-2.25 2.25H9.75a2.25 2.25 0 01-2.25-2.25V15m0-3.75V9.75a2.25 2.25 0 012.25-2.25h2.25a2.25 2.25 0 012.25 2.25v2.25m-7.5-3.75h7.5" /></svg>
+      <h2>Memperbaiki Citra Diri bag. 4</h2>
+    </div>
+    <p>Cara ampuh menghancurkan fobia, dogma & paradigma yg merintangi perjalanan kesuksesan.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/FobiadanDogma/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card education">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="#60a5fa"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+      <h2>Potensi & Nilai Investasi</h2>
+    </div>
+    <p>Memahami kekuatan compounding untuk mencapai pertumbuhan eksponensial.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/Compounding-NP/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card rules">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="#fde047"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+      <h2>Peraturan & Kebijakan</h2>
+    </div>
+    <p>Panduan mengenai aturan dan kebijakan yang berlaku di dalam DV-Team.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/PeraturanKodeEtik/" target="_blank">
+        <span>Buka Materi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card app">
+    <div class="card-header">
+      <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="#22d3ee"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+      <h2>Aplikasi Daftar Inventaris Aset Sosial</h2>
+    </div>
+    <p>Halaman untuk menyimpan, mengelola, dan memantau daftar nama anggota Anda.</p>
+    <div class="buttons">
+      <a class="open" href="https://cahayabiruna-ctrl.github.io/edukasiNP-3/" target="_blank">
+        <span>Buka Aplikasi</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(() => console.log('Service Worker terdaftar'))
+    .catch((err) => console.error('SW gagal daftar', err));
+}
+</script>
+
+</body>
+</html>
